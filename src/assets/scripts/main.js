@@ -1,3 +1,4 @@
+import '../fonts/fonts.css';
 import '../styles/main.css';
 
 import init from "./init"

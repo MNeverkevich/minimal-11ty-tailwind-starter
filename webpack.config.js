@@ -4,7 +4,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-  entry: './src/scripts/main.js',
+  entry: './src/assets/scripts/main.js',
   output: {
     path: path.resolve(__dirname, '_site/assets'),
     filename: 'main.js'
@@ -12,10 +12,22 @@ module.exports = {
   module: {
     rules: [
       {
+				test: /\.(woff|woff2)$/,
+				use: [
+					{
+						loader: "file-loader",
+						options: {
+							publicPath: "/assets/fonts/",
+							outputPath: (url) => `fonts/${url}`,
+						}
+					}
+				]
+			},
+      {
         test: /\.css$/,
         exclude: /node_modules/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
-      }
+      },
     ]
   },
   plugins: [
